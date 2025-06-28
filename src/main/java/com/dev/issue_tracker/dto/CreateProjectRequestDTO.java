@@ -9,8 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class CreateProjectRequestDTO {
-    @NotBlank
-    private String name;
+  @NotBlank private String name;
 
-    private String description;
+  private String description;
 }

@@ -9,10 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class CreateIssueRequestDTO {
-    @NotBlank
-    private String title;
+  @NotBlank private String title;
 
-    private String description;
-    private String status; // or enum
+  private String description;
+  private String status; // or enum
 }
-

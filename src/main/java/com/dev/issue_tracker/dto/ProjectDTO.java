@@ -1,8 +1,7 @@
 package com.dev.issue_tracker.dto;
 
-import lombok.*;
-
 import java.util.UUID;
+import lombok.*;
 
 @Getter
 @Setter
@@ -10,8 +9,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class ProjectDTO {
-    private UUID id;
-    private String name;
-    private String description;
-    private String createdBy;
+  private UUID id;
+  private String name;
+  private String description;
+  private String createdBy;
 }
