@@ -8,7 +8,6 @@ import com.dev.issue_tracker.model.Project;
 import com.dev.issue_tracker.model.User;
 import com.dev.issue_tracker.service.ProjectService;
 import jakarta.validation.Valid;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,7 +37,7 @@ public class ProjectController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<ProjectDTO> getById(@PathVariable UUID id) {
+  public ResponseEntity<ProjectDTO> getById(@PathVariable Integer id) {
     return ResponseEntity.ok(ProjectMapper.toDTO(projectService.getProjectById(id)));
   }
 
@@ -52,7 +51,7 @@ public class ProjectController {
 
   @DeleteMapping("/{id}")
   @PreAuthorize("hasRole('ADMIN')")
-  public ResponseEntity<Void> delete(@PathVariable UUID id, @AuthenticationPrincipal User user) {
+  public ResponseEntity<Void> delete(@PathVariable Integer id, @AuthenticationPrincipal User user) {
     projectService.deleteProject(id, user);
     return ResponseEntity.noContent().build();
   }

@@ -12,7 +12,7 @@ public class ProjectMapper {
         .id(project.getId())
         .name(project.getName())
         .description(project.getDescription())
-        .createdBy(project.getCreatedBy().getEmail())
+        .createdBy(project.getCreatedBy().getUserName())
         .build();
   }
 

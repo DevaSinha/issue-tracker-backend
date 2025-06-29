@@ -9,7 +9,6 @@ import com.dev.issue_tracker.repository.IssueRepository;
 import com.dev.issue_tracker.repository.ProjectRepository;
 import java.time.Instant;
 import java.util.List;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,13 +20,13 @@ public class IssueService {
   private final IssueRepository issueRepository;
   private final ProjectRepository projectRepository;
 
-  public List<Issue> getIssuesByProjectId(UUID projectId) {
+  public List<Issue> getIssuesByProjectId(Integer projectId) {
     return issueRepository.findAll().stream()
         .filter(issue -> issue.getProject().getId().equals(projectId))
         .toList();
   }
 
-  public Issue createIssue(UUID projectId, Issue issue, User user) {
+  public Issue createIssue(Integer projectId, Issue issue, User user) {
     Project project =
         projectRepository
             .findById(projectId)
@@ -43,7 +42,7 @@ public class IssueService {
     return issue.getCreatedBy() != null && issue.getCreatedBy().getId().equals(user.getId());
   }
 
-  public void deleteIssue(UUID issueId, User user) {
+  public void deleteIssue(Integer issueId, User user) {
     Issue issue =
         issueRepository
             .findById(issueId)
@@ -57,7 +56,7 @@ public class IssueService {
   }
 
   public Page<Issue> getIssuesByProject(
-      UUID projectId, boolean mine, User user, Pageable pageable) {
+      Integer projectId, boolean mine, User user, Pageable pageable) {
     if (mine) {
       return issueRepository.findByProjectIdAndCreatedBy(projectId, user, pageable);
     }

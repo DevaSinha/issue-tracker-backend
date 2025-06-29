@@ -26,4 +26,6 @@ public class User {
 
   @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
   private List<Issue> issues;
+
+  private String userName;
 }

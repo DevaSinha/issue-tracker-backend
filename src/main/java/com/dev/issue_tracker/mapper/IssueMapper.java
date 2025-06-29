@@ -13,6 +13,9 @@ public class IssueMapper {
         .description(issue.getDescription())
         .status(issue.getStatus())
         .projectId(issue.getProject().getId())
+        .priority(issue.getPriority())
+        .assignee(issue.getAssignee() != null ? issue.getAssignee().getUserName() : null)
+        .createdBy(issue.getCreatedBy().getUserName())
         .build();
   }
 

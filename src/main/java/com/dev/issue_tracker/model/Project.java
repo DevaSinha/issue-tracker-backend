@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.*;
 import lombok.*;
-import org.hibernate.annotations.UuidGenerator;
 
 @Entity
 @Getter
@@ -14,7 +13,9 @@ import org.hibernate.annotations.UuidGenerator;
 @Builder
 public class Project {
 
-  @Id @UuidGenerator private UUID id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
   private String name;
   private String description;

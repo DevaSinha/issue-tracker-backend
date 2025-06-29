@@ -1,0 +1,6 @@
+ALTER TABLE issue ADD COLUMN priority VARCHAR(20);
+ALTER TABLE issue ADD COLUMN assignee_id UUID;
+ALTER TABLE users ADD COLUMN user_name VARCHAR(255);
+
+ALTER TABLE issue
+ADD CONSTRAINT fk_assignee FOREIGN KEY (assignee_id) REFERENCES users(id) ON DELETE SET NULL;

@@ -7,7 +7,6 @@ import com.dev.issue_tracker.model.User;
 import com.dev.issue_tracker.repository.ProjectRepository;
 import java.time.Instant;
 import java.util.List;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +21,7 @@ public class ProjectService {
     return projectRepository.findAll();
   }
 
-  public Project getProjectById(UUID id) {
+  public Project getProjectById(Integer id) {
     return projectRepository
         .findById(id)
         .orElseThrow(() -> new NotFoundException("Project not found"));
@@ -38,7 +37,7 @@ public class ProjectService {
     return project.getCreatedBy() != null && project.getCreatedBy().getId().equals(user.getId());
   }
 
-  public void deleteProject(UUID id, User user) {
+  public void deleteProject(Integer id, User user) {
     Project project =
         projectRepository
             .findById(id)

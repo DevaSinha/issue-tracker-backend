@@ -6,7 +6,6 @@ import com.dev.issue_tracker.mapper.IssueMapper;
 import com.dev.issue_tracker.model.Issue;
 import com.dev.issue_tracker.model.User;
 import com.dev.issue_tracker.service.IssueService;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +23,7 @@ public class IssueController {
 
   @GetMapping
   public ResponseEntity<PageResponse<IssueDTO>> getAll(
-      @PathVariable UUID projectId,
+      @PathVariable Integer projectId,
       @RequestParam(defaultValue = "false") boolean mine,
       @AuthenticationPrincipal User user,
       @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC)
@@ -36,13 +35,15 @@ public class IssueController {
 
   @PostMapping
   public IssueDTO create(
-      @PathVariable UUID projectId, @RequestBody Issue issue, @AuthenticationPrincipal User user) {
+      @PathVariable Integer projectId,
+      @RequestBody Issue issue,
+      @AuthenticationPrincipal User user) {
     return IssueMapper.toDTO(issueService.createIssue(projectId, issue, user));
   }
 
   @DeleteMapping("/{issueId}")
   public ResponseEntity<Void> delete(
-      @PathVariable UUID issueId, @AuthenticationPrincipal User user) {
+      @PathVariable Integer issueId, @AuthenticationPrincipal User user) {
     issueService.deleteIssue(issueId, user);
     return ResponseEntity.noContent().build();
   }

@@ -2,9 +2,7 @@ package com.dev.issue_tracker.model;
 
 import jakarta.persistence.*;
 import java.time.Instant;
-import java.util.UUID;
 import lombok.*;
-import org.hibernate.annotations.UuidGenerator;
 
 @Entity
 @Getter
@@ -14,7 +12,9 @@ import org.hibernate.annotations.UuidGenerator;
 @Builder
 public class Issue {
 
-  @Id @UuidGenerator private UUID id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
   private String title;
   private String description;
@@ -32,4 +32,11 @@ public class Issue {
   @ManyToOne
   @JoinColumn(name = "created_by")
   private User createdBy;
+
+  @Enumerated(EnumType.STRING)
+  private IssuePriority priority;
+
+  @ManyToOne
+  @JoinColumn(name = "assignee_id")
+  private User assignee;
 }
